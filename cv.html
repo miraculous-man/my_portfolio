@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae - John Doe</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --surface-color: #ffffff;
+            --primary-color: #000000;
+            --accent-color: #3b82f6;
+            --text-main: #111827;
+            --text-secondary: #4b5563;
+            --border-color: #e5e7eb;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .dark-mode {
+            --bg-color: #030712;
+            --surface-color: #111827;
+            --primary-color: #ffffff;
+            --accent-color: #60a5fa;
+            --text-main: #f9fafb;
+            --text-secondary: #9ca3af;
+            --border-color: #374151;
+            --card-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .cv-main-card {
+            background-color: var(--surface-color);
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .cv-sidebar {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 3rem 2rem;
+            height: 100%;
+        }
+
+        .cv-content {
+            padding: 3rem;
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .experience-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .experience-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .experience-item::after {
+            content: "";
+            position: absolute;
+            left: 3.5px;
+            top: 24px;
+            bottom: -24px;
+            width: 1px;
+            background: var(--border-color);
+        }
+
+        .experience-item:last-child::after { display: none; }
+
+        .job-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .company-meta {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tag {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .theme-btn {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            transform: rotate(12deg);
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .nav-back {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .nav-back:hover {
+            background: var(--bg-color);
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 992px) {
+            .cv-sidebar { height: auto; }
+            .cv-main-card { border-radius: 0; margin-top: 0; }
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            .cv-main-card { border: none; box-shadow: none; margin: 0; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="nav-back no-print">
+        <i class="fas fa-arrow-left"></i> Portfolio
+    </a>
+
+    <div id="themeToggle" class="theme-btn no-print">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="container py-md-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="cv-main-card">
+                    <div class="row g-0">
+                        <!-- Sidebar -->
+                        <div class="col-lg-4 cv-sidebar">
+                            <div class="text-center text-lg-start" data-aos="fade-up">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" 
+                                     class="profile-img shadow" alt="John Doe">
+                                <h1 class="display-6 fw-bold mb-1">John Doe</h1>
+                                <p class="text-secondary opacity-75 mb-4">Senior Full Stack Developer</p>
+                            </div>
+
+                            <div class="mt-5" data-aos="fade-up" data-aos-delay="100">
+                                <h6 class="text-uppercase small fw-bold text-accent mb-3 opacity-75">Contact</h6>
+                                <div class="small d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <i class="fas fa-envelope opacity-50"></i> john.doe@example.com
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <i class="fas fa-phone opacity-50"></i> +1 555 123 4567
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <i class="fas fa-location-dot opacity-50"></i> San Francisco, CA
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <i class="fab fa-linkedin opacity-50"></i> /in/johndoe
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5" data-aos="fade-up" data-aos-delay="200">
+                                <h6 class="text-uppercase small fw-bold text-accent mb-3 opacity-75">Education</h6>
+                                <div class="mb-3">
+                                    <div class="fw-bold small">B.S. Computer Science</div>
+                                    <div class="text-secondary small opacity-75">UC Berkeley, 2018</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5" data-aos="fade-up" data-aos-delay="300">
+                                <h6 class="text-uppercase small fw-bold text-accent mb-3 opacity-75">Languages</h6>
+                                <div class="small d-flex flex-column gap-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span>English</span>
+                                        <span class="opacity-50">Native</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Spanish</span>
+                                        <span class="opacity-50">Fluent</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="col-lg-8 cv-content">
+                            <div data-aos="fade-up">
+                                <div class="section-title">Summary</div>
+                                <p class="text-secondary mb-5">
+                                    Highly innovative Senior Full Stack Developer with 8+ years of experience crafting high-performance, accessible, and scalable web solutions. Expert in the modern ecosystem with a specialized focus on React, Node.js, and Cloud Infrastructure. Passionate about mentoring teams and driving engineering excellence.
+                                </p>
+                            </div>
+
+                            <div data-aos="fade-up" data-aos-delay="100">
+                                <div class="section-title">Experience</div>
+                                
+                                <div class="experience-item">
+                                    <div class="job-title">Lead Software Engineer</div>
+                                    <div class="company-meta">Tech Innovations Corp • 2021 — Present</div>
+                                    <p class="text-secondary small mb-3">
+                                        Architected and deployed a microservices-based analytics platform processing 50M+ events daily.
+                                    </p>
+                                    <ul class="text-secondary small ps-3">
+                                        <li class="mb-2">Reduced server costs by 35% through container orchestration and serverless functions.</li>
+                                        <li>Led a cross-functional team of 12 engineers in a major platform redesign.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="experience-item">
+                                    <div class="job-title">Senior Full Stack Developer</div>
+                                    <div class="company-meta">Creative Web Solutions • 2018 — 2021</div>
+                                    <p class="text-secondary small mb-3">
+                                        Developed custom enterprise solutions for Fortune 500 clients using React and Python/Django.
+                                    </p>
+                                    <ul class="text-secondary small ps-3">
+                                        <li class="mb-2">Improved application response time by 45% via advanced caching and DB optimization.</li>
+                                        <li>Implemented comprehensive CI/CD pipelines reducing deployment time by 50%.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mt-5" data-aos="fade-up" data-aos-delay="200">
+                                <div class="section-title">Skills & Technologies</div>
+                                <div class="mb-4">
+                                    <div class="small fw-bold mb-3">Programming & Frameworks</div>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="tag">React / Next.js</span>
+                                        <span class="tag">TypeScript</span>
+                                        <span class="tag">Node.js</span>
+                                        <span class="tag">Python / Django</span>
+                                        <span class="tag">GraphQL</span>
+                                        <span class="tag">PostgreSQL</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small fw-bold mb-3">Infrastructure & Tools</div>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="tag">AWS / Cloud</span>
+                                        <span class="tag">Docker</span>
+                                        <span class="tag">Kubernetes</span>
+                                        <span class="tag">Terraform</span>
+                                        <span class="tag">Git / CI-CD</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 text-center no-print" data-aos="fade-up" data-aos-delay="300">
+                                <button onclick="window.print()" class="btn btn-dark btn-lg rounded-pill px-5 py-3">
+                                    <i class="fas fa-print me-2"></i> Download Full Resume
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="js/cv.js"></script>
+</body>
+</html>
